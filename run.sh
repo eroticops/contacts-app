@@ -28,12 +28,12 @@ trap cleanup SIGINT
 # Check if running inside Docker
 if [ -f /.dockerenv ]; then
     echo "[+] Running inside Docker"
-    doppler run --command='gunicorn --log-level info --access-logfile - -w 4 -b 0.0.0.0:$PORT server:app'
+    doppler run --command='gunicorn --log-level info --access-logfile - -w 1 -b 0.0.0.0:$PORT server:app'
 else
     echo "[+] Running on local machine"
     source .venv/bin/activate
 
     # Run Gunicorn server
-    doppler run --command='gunicorn --log-level info --access-logfile - -w 4 -b 0.0.0.0:$PORT server:app'
+    doppler run --command='gunicorn --log-level info --access-logfile - -w 1 -b 0.0.0.0:$PORT server:app'
     deactivate
 fi
